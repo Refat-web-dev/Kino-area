@@ -10,11 +10,15 @@ for (let i = 20; i < 45; i++) {
 export let img = import.meta.env.VITE_BASE_IMG
 
 let key = img
-export function reloadCards(arr, place) {
+export function reloadCards(arr, place, isSwiper = false) {
     place.innerHTML = ""
 
     for (let item of arr) {
-
+        // if(isSwiper) {
+        //     let swiperDiv = document.createElement('div')
+        //     swiperDiv.classList.add('swiper-slide')
+            
+        // }
         let card = document.createElement("div")
         let card_img = document.createElement("div")
         let rate = document.createElement("div")
@@ -27,7 +31,10 @@ export function reloadCards(arr, place) {
         card_img.className = "card_img"
         card_img.style.backgroundImage = `url("${img + item.poster_path}")`
         card_img.setAttribute("data-backdrop", `url("${img + item.backdrop_path}")`)
-
+        
+        if(isSwiper) {
+            card.classList.add('swiper-slide')
+        }
         rate.className = "rate"
         rate.innerHTML = item.vote_average.toFixed(2)
 
@@ -67,7 +74,6 @@ export function reloadCards(arr, place) {
         }
 
     }
-
 }
 let trailers_player = document.querySelector(".trailers_player")
 let trailers_title = document.querySelector(".trailers_title h2")
